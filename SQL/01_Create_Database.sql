@@ -1,0 +1,54 @@
+USE upi_analysis;
+
+SELECT COUNT(*) AS total_records
+FROM upi_transactions_new;
+
+DESCRIBE upi_transactions_new;
+
+SELECT transaction_id, COUNT(*) AS duplicate_count
+FROM upi_transactions_new
+GROUP BY transaction_id
+HAVING COUNT(*) > 1;
+
+DESCRIBE upi_transactions_new;
+SELECT
+    MIN(amount) AS minimum_amount,
+    MAX(amount) AS maximum_amount,
+    AVG(amount) AS average_amount
+FROM upi_transactions_new;
+
+SHOW COLUMNS FROM upi_transactions_new;
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'upi_analysis'
+AND TABLE_NAME = 'upi_transactions_n
+
+SELECT
+    transaction_id,
+    COUNT(*) AS duplicate_count
+FROM upi_transactions_new
+GROUP BY transaction_id
+HAVING COUNT(*) > 1;
+
+SELECT
+    COUNT(*) AS total_transactions,
+    COUNT(DISTINCT transaction_id) AS unique_transactions
+FROM upi_transactions_new;
+
+
+SELECT
+    bank_name,
+    COUNT(*) AS total_transactions,
+    SUM(amount) AS total_transaction_amount,
+    ROUND(AVG(amount), 2) AS average_transaction_amount
+FROM upi_transactions_new
+GROUP BY bank_name
+ORDER BY total_transaction_amount DESC;
+
+SELECT
+    COUNT(*) AS total_transactions,
+    SUM(amount) AS total_amount,
+    ROUND(AVG(amount), 2) AS average_amount
+FROM upi_transactions_new
+GROUP BY city 
+ORDER BY total_amount DESC;
