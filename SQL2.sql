@@ -1,0 +1,1 @@
+DESCRIBE upi_transactions_new;
